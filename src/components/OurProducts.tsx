@@ -1,5 +1,6 @@
 import ProjectsSection from "./ProjectsSection";
 import dashboard from "../assets/dashboard.svg";
+import dashboardAi from "../assets/image 41.svg";
 
 function OurProducts() {
   return (
@@ -30,7 +31,7 @@ function OurProducts() {
       <ProjectsSection
         heading="Rapisurv Ai"
         paragraph="Rapisurv ai is an industry-specific predictive and generative artificial intelligence solution that helps construction and infrastructure project planners achieve better results, we want your project to succeed by giving you tools that can help you see further into the future before the you start. This can help estimators see further ahead and help initiatives planners to decide on which initiative should go forward. "
-        img={dashboard}
+        img={dashboardAi}
       />
     </div>
   );

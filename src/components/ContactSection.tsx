@@ -3,61 +3,25 @@ import FlexContent from "./FlexContent";
 import lastImg from "../assets/final.svg";
 
 import Button from "./Button";
-
-// import { GoogleReCaptcha, useGoogleReCaptcha } from "react-google-recaptcha-v3";
+import { useState } from "react";
+import Spinner from "react-spinner-material";
 
 import { ValidationError, useForm } from "@formspree/react";
 import ReCAPTCHA from "react-google-recaptcha";
+import SuccessModal from "./SuccessModal";
 
 function ContactSection() {
-  const [state, handleSubmit] = useForm("mknajeyo", {
-    data: { "g-recaptcha-response": "" },
-  });
+  const [token, setToken] = useState<string | null>("");
+  const [isVerified, setIsVerified] = useState(false);
 
-  const handleVerify = (data: unknown) => {
-    console.log(data);
+  const [state, handleSubmit, reset] = useForm("mknajeyo");
+
+  const [, setSubmitted] = useState(true);
+  const handleVerify = (data: string | null) => {
+    setToken(data);
+    setIsVerified(true);
   };
-  // const [token, setToken] = useState<null | unknown>(null);
-  // const [isVerified, setIsVerified] = useState(false);
-  // const [loading, setLoading] = useState(false);
-
-  // const handleSubmit = async () => {
-  //   if (!isVerified) {
-  //     alert("Please complete the reCAPTCHA verification.");
-  //     return;
-  //   }
-
-  //   try {
-  //     setLoading(true);
-  //     const response = await fetch("https://formspree.io/f/mknajeyo", {
-  //       method: "POST",
-  //       headers: { "Content-Type": "application/json" },
-  //       body: JSON.stringify({
-  //         name: "test@email.com", // Replace with form data
-  //         email: "test@email.com", // Replace with form data
-  //         message: "Hello world!",
-  //         "g-recaptcha-response": token,
-  //       }),
-  //     });
-
-  //     if (!response.ok) {
-  //       throw new Error(`Error submitting form: ${response.statusText}`);
-  //     }
-
-  //     alert("Form submitted successfully!");
-  //     setLoading(false);
-  //     setIsVerified(false); // Reset verification state for next submission
-  //   } catch (error) {
-  //     console.error("Error:", error);
-  //     alert("An error occurred while submitting the form.");
-  //   }
-  // };
-
-  // function onChange(value: unknown) {
-  //   console.log("Captcha value:", value);
-  //   setIsVerified(true);
-  //   setToken(value);
-  // }
+  console.log(token);
   return (
     <div className="bg-white pt-10">
       <FlexContent
@@ -66,7 +30,6 @@ function ContactSection() {
         image={lastImg}
         className="md:flex-row"
       />
-
       <div
         className="bg-[#D0EFEB]  md:mx-8 px-10 py-11 md:py-0  mt-44 rounded-[40px] md:pt-14 md:flex"
         id="contact"
@@ -130,24 +93,69 @@ function ContactSection() {
               required
             ></textarea>
 
-            {/* <ValidationError
+            <ValidationError
               prefix="Message"
               field="message"
               errors={state.errors}
               className="text-red-500"
-            /> */}
+            />
           </div>
-          <Button type="submit">submit</Button>
-          {/* <ValidationError errors={state.errors} className="text-red-500" /> */}
+          <Button
+            type="submit"
+            disabled={!isVerified}
+            className="disabled:bg-slate-400"
+          >
+            {state.submitting ? (
+              <Spinner radius={20} color={"#fff"} stroke={2} visible={true} />
+            ) : (
+              "Submit"
+            )}
+          </Button>
+          <ValidationError errors={state.errors} className="text-red-500" />
 
           <div className="mt-9 pb-8">
             <ReCAPTCHA
-              sitekey="6LeoHe8pAAAAAFFSwuy2GMd8IzF2Q_mdzYexe-Lr"
+              sitekey="6LflSu8pAAAAAI7FNgiZs5zHV8zjbHgGurgn8F6N"
               onChange={handleVerify}
             />
           </div>
         </form>
       </div>
+      <SuccessModal open={state.succeeded} onClose={() => setSubmitted(false)}>
+        <div>
+          <div className="w-12 h-12 rounded-full bg-green-100 dark:bg-green-900 p-2 flex items-center justify-center mx-auto mb-3.5">
+            <svg
+              aria-hidden="true"
+              className="w-8 h-8 text-green-500 dark:text-green-400"
+              fill="currentColor"
+              viewBox="0 0 20 20"
+              xmlns="http://www.w3.org/2000/svg"
+            >
+              <path
+                fill-rule="evenodd"
+                d="M16.707 5.293a1 1 0 010 1.414l-8 8a1 1 0 01-1.414 0l-4-4a1 1 0 011.414-1.414L8 12.586l7.293-7.293a1 1 0 011.414 0z"
+                clip-rule="evenodd"
+              ></path>
+            </svg>
+            <span className="sr-only">Success</span>
+          </div>
+          <p className="mb-4 text-lg font-semibold text-gray-900">
+            Successfully removed product.
+          </p>
+          <button
+            data-modal-toggle="successModal"
+            type="button"
+            className="py-2 px-3 text-sm font-medium text-center text-green-500 rounded-lg bg-black hover:bg-black focus:ring-4 focus:outline-none focus:ring-primary-300 dark:focus:ring-primary-900"
+            onClick={() => {
+              reset();
+
+              setSubmitted(false);
+            }}
+          >
+            confirmed
+          </button>
+        </div>
+      </SuccessModal>
     </div>
   );
 }

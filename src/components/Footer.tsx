@@ -20,10 +20,23 @@ const Footer = () => {
             way,Isolo, Lagos. Nigeria
           </p>
           <div className="flex gap-4 mt-4">
-            <img src={linkedin} alt="" />
-            <img src={facebook} alt="" />
-            <img src={instagrom} alt="" />
-            <img src={youtube} alt="" />
+            <Link
+              to={`https://www.linkedin.com/company/isekit 
+`}
+            >
+              <img src={linkedin} alt="" />
+            </Link>
+
+            <Link to={`https://www.facebook.com/ISEKITLLC`}>
+              <img src={facebook} alt="" />
+            </Link>
+
+            <Link to={`https://www.instagram.com/rapisurv/`}>
+              <img src={instagrom} alt="" />
+            </Link>
+            <Link to={`https://www.youtube.com/@rapisurv`}>
+              <img src={youtube} alt="" />
+            </Link>
           </div>
         </div>
 
