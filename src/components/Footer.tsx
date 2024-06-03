@@ -50,13 +50,13 @@ const Footer = () => {
             <h2 className="font-medium text-base">Products</h2>
             <Link
               className="text-[#CED7D6] font-light"
-              to=" https://rapisurv.com"
+              to="https://rapisurv.com"
             >
               Rapisurv
             </Link>
             <Link
               className="text-[#CED7D6] font-light"
-              to=" https://rapisurv.ai"
+              to="https://rapisurv.ai"
             >
               Rapisurv Ai
             </Link>

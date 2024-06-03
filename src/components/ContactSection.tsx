@@ -36,7 +36,7 @@ function ContactSection() {
       >
         <div className="flex-1 ">
           <h2 className="text-[40px]">Get in Touch</h2>
-          <p className="text-lg font-normal text-[#343535]">
+          <p className="text-lg font-normal text-[#343535] md:w-[80%]">
             We're here to help. Reach out to us with any questions or to learn
             more about our services.
           </p>

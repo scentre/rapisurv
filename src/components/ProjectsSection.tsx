@@ -1,3 +1,4 @@
+import { Link } from "react-router-dom";
 import Button from "./Button";
 
 const ProjectsSection = ({
@@ -17,7 +18,9 @@ const ProjectsSection = ({
         {paragraph}
       </p>
 
-      <Button>Learn More</Button>
+      <Button>
+        <Link to={"https://rapisurv.com"}>Learn More</Link>
+      </Button>
 
       <img src={img} alt="" className="mt-12 w-full" />
     </div>
