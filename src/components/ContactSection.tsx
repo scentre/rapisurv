@@ -4,7 +4,7 @@ import lastImg from "../assets/final.svg";
 
 import Button from "./Button";
 
-import { GoogleReCaptcha, useGoogleReCaptcha } from "react-google-recaptcha-v3";
+// import { GoogleReCaptcha, useGoogleReCaptcha } from "react-google-recaptcha-v3";
 
 import { ValidationError, useForm } from "@formspree/react";
 import ReCAPTCHA from "react-google-recaptcha";
@@ -14,7 +14,7 @@ function ContactSection() {
     data: { "g-recaptcha-response": "" },
   });
 
-  const handleVerify = (data) => {
+  const handleVerify = (data: unknown) => {
     console.log(data);
   };
   // const [token, setToken] = useState<null | unknown>(null);
